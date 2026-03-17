@@ -387,6 +387,42 @@ border-color: transparent;
 color: white;
 }
 
+.project-links {
+display: flex;
+flex-wrap: wrap;
+gap: 12px;
+margin-top: 16px;
+}
+
+.project-links .github-btn,
+.project-links .demo-btn {
+margin-top: 0;
+}
+
+.demo-btn {
+display:inline-flex;
+align-items: center;
+gap: 8px;
+padding:10px 20px;
+background: linear-gradient(135deg, var(--theme-secondary), #06b6d4);
+border-radius:8px;
+color: white;
+font-weight: 500;
+text-decoration:none;
+position: relative;
+z-index: 100;
+transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+border: none;
+}
+
+.demo-btn:hover {
+transform: translateY(-4px) scale(1.05);
+box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 20px var(--theme-secondary);
+border-color: transparent;
+color: white;
+}
+
 .education-container{
 display:flex;
 flex-direction:column;

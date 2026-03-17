@@ -49,7 +49,11 @@ Feel free to reach out if you want to collaborate on a project, talk about data 
 
 - **Email:** [shubhamkumar240804@gmail.com](mailto:shubhamkumar240804@gmail.com)
 - **GitHub:** [@ShubhamKumar284](https://github.com/ShubhamKumar284)
+<<<<<<< HEAD
 - **LinkedIn:** [Shubham Kumar]([https://linkedin.com](https://www.linkedin.com/in/shubham-krr27/])
+=======
+- **LinkedIn:** [Shubham Kumar](https://linkedin.com)
+>>>>>>> a8191bc (added live demo)
 - **LeetCode:** [ShubhamKumar_17](https://leetcode.com/u/ShubhamKumar_17/)
 
 ---
