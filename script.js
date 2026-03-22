@@ -83,32 +83,49 @@ setTimeout(type, 80);
 
 
 /* =========================
-   SCROLL REVEAL
+   PRELOADER
+========================= */
+window.addEventListener('load', () => {
+    const preloader = document.querySelector('.preloader');
+    if(preloader) {
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            // Remove from DOM to prevent blocking interaction
+            setTimeout(() => preloader.remove(), 600);
+        }, 600);
+    }
+});
+
+/* =========================
+   SCROLL REVEAL & STAGGER
 ========================= */
 
-const reveals = document.querySelectorAll(".reveal");
+const reveals = document.querySelectorAll(".reveal, .donut-section, .hero");
 
 if(reveals.length > 0){
+    const observer = new IntersectionObserver((entries)=>{
+        entries.forEach(entry=>{
+            if(entry.isIntersecting){
+                entry.target.classList.add("active");
+                
+                const children = entry.target.querySelectorAll('.stagger-child:not(.show)');
+                children.forEach((child, index) => {
+                    setTimeout(() => {
+                        child.classList.add('show');
+                    }, index * 120);
+                });
+            }
+        });
+    },{
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+    });
 
-const observer = new IntersectionObserver((entries)=>{
-
-entries.forEach(entry=>{
-
-if(entry.isIntersecting){
-entry.target.classList.add("active");
-}
-
-});
-
-},{
-threshold: 0,
-rootMargin: "0px"
-});
-
-reveals.forEach(section=>{
-observer.observe(section);
-});
-
+    reveals.forEach(section=>{
+        const staggerTargets = section.querySelectorAll('.skill-pill, .project-card, .timeline-item, .skills-card, .achievement-card, .cert-card, .contact-box, .ds-card, .donut-card');
+        staggerTargets.forEach(child => child.classList.add('stagger-child'));
+        observer.observe(section);
+    });
 }
 
 
@@ -250,4 +267,110 @@ document.addEventListener("keydown", (e) => {
         }
     }
 });
+
+/* =========================
+   DONUT CHART ANIMATION
+========================= */
+const donuts = document.querySelectorAll('.donut');
+if(donuts.length > 0) {
+    donuts.forEach(donut => {
+        const val = donut.style.getPropertyValue('--value');
+        if(val) {
+            donut.setAttribute('data-target', val);
+            donut.style.setProperty('--value', '0');
+            const span = donut.querySelector('span');
+            if(span) span.textContent = '0%';
+        }
+    });
+
+    const donutObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting) {
+                const donut = entry.target;
+                if(donut.classList.contains('animated')) return;
+                donut.classList.add('animated');
+                
+                const targetStr = donut.getAttribute('data-target');
+                if(!targetStr) return;
+                const targetValue = parseInt(targetStr);
+                const duration = 1500; // ms
+                const startTime = performance.now();
+                
+                function animateDonut(currentTime) {
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    
+                    const easeOut = 1 - Math.pow(1 - progress, 3); // cubic ease out
+                    const currentValue = Math.floor(easeOut * targetValue);
+                    
+                    donut.style.setProperty('--value', currentValue);
+                    const span = donut.querySelector('span');
+                    if(span) span.textContent = currentValue + '%';
+                    
+                    if(progress < 1) {
+                        requestAnimationFrame(animateDonut);
+                    } else {
+                        donut.style.setProperty('--value', targetValue);
+                        if(span) span.textContent = targetValue + '%';
+                    }
+                }
+                
+                requestAnimationFrame(animateDonut);
+            }
+        });
+    }, {
+        threshold: 0.5
+    });
+
+    donuts.forEach(donut => {
+        donutObserver.observe(donut);
+    });
+}
+
+/* =========================
+   NUMBER COUNTER ANIMATION
+========================= */
+const counters = document.querySelectorAll('.ds-number');
+if (counters.length > 0) {
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const targetElement = entry.target;
+                if (targetElement.classList.contains('counted')) return;
+                targetElement.classList.add('counted');
+                
+                const targetStr = targetElement.innerText.trim();
+                const match = targetStr.match(/(\d+)(.*)/);
+                if (match) {
+                    const targetNum = parseInt(match[1]);
+                    const suffix = match[2];
+                    const duration = 2000;
+                    const startTime = performance.now();
+                    
+                    targetElement.innerText = '0' + suffix;
+                    
+                    function updateCounter(currentTime) {
+                        const elapsed = currentTime - startTime;
+                        const progress = Math.min(elapsed / duration, 1);
+                        
+                        const easeOut = 1 - Math.pow(1 - progress, 3);
+                        const currentNum = Math.floor(easeOut * targetNum);
+                        
+                        targetElement.innerText = currentNum + suffix;
+                        
+                        if (progress < 1) {
+                            requestAnimationFrame(updateCounter);
+                        } else {
+                            targetElement.innerText = targetNum + suffix;
+                        }
+                    }
+                    requestAnimationFrame(updateCounter);
+                }
+            }
+        });
+    }, { threshold: 0.5 });
+    
+    counters.forEach(counter => counterObserver.observe(counter));
+}
+
 });

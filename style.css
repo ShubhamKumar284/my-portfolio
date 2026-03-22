@@ -184,6 +184,18 @@ z-index: -1;
   color: #fff;
 }
 
+/* Staggered entrance animation class */
+.stagger-child {
+    opacity: 0;
+    transform: translateY(35px) scale(0.95);
+    transition: all 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.stagger-child.show {
+    opacity: 1;
+    transform: none;
+}
+
 header{
 display:flex;
 justify-content:space-between;
@@ -1175,9 +1187,84 @@ box-shadow:0 0 20px var(--theme-secondary);
 .ds-number{
 font-size:42px;
 font-weight:700;
-color:var(--theme-text);
+color: #ffffff !important;
 position:relative;
 z-index:10;
+padding: 12px 30px;
+border-radius: 8px;
+margin-bottom: 20px;
+display: inline-block;
+overflow: hidden;
+animation: pulseBoxGlow 3s infinite alternate;
+transition: all 0.3s ease-out;
+}
+
+.ds-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 25px var(--theme-secondary);
+    border-color: var(--theme-secondary);
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.ds-card:hover:has(.cyan) {
+    border-color: #06b6d4;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 30px rgba(6, 182, 212, 0.25);
+    background: rgba(6, 182, 212, 0.05);
+}
+
+.ds-card:hover:has(.purple) {
+    border-color: var(--theme-primary);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 30px rgba(168, 85, 247, 0.25);
+    background: rgba(168, 85, 247, 0.05);
+}
+
+.ds-card:hover:has(.blue) {
+    border-color: var(--theme-blue);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 30px rgba(59, 130, 246, 0.25);
+    background: rgba(59, 130, 246, 0.05);
+}
+
+.ds-card:hover .ds-number.cyan {
+    animation: none;
+    transform: scale(1.1);
+    filter: brightness(1.3);
+    box-shadow: 0 0 50px rgba(6, 182, 212, 0.8);
+}
+
+.ds-card:hover .ds-number.purple {
+    animation: none;
+    transform: scale(1.1);
+    filter: brightness(1.3);
+    box-shadow: 0 0 50px var(--theme-primary);
+}
+
+.ds-card:hover .ds-number.blue {
+    animation: none;
+    transform: scale(1.1);
+    filter: brightness(1.3);
+    box-shadow: 0 0 50px var(--theme-blue);
+}
+
+.ds-number::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transform: skewX(-25deg);
+    animation: sweepShine 4s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pulseBoxGlow {
+    0% { transform: scale(1); filter: brightness(1); }
+    100% { transform: scale(1.03); filter: brightness(1.15); }
+}
+
+@keyframes sweepShine {
+    0% { left: -100%; }
+    20%, 100% { left: 200%; }
 }
 
 .cyan{
@@ -1258,8 +1345,8 @@ border:1px solid #2a2a40;
 .ds-number{
 font-size:42px;
 font-weight:700;
-color:var(--theme-text);
-margin-bottom:6px;
+color: #ffffff !important;
+margin-bottom:20px;
 }
 
 .ds-card p{
@@ -1883,3 +1970,83 @@ transform:translateY(0);
     background: rgba(239, 68, 68, 0.1);
     transform: scale(1.1) rotate(90deg);
 }
+
+/* =========================
+   PRELOADER & ANIMATIONS
+========================= */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--theme-bg-alt);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999999;
+    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loader-content .logo-badge {
+    animation: pulseLogo 1.5s infinite alternate ease-in-out;
+    box-shadow: 0 0 20px var(--theme-primary);
+}
+
+.loading-bar {
+    width: 220px;
+    height: 6px;
+    background: var(--theme-card-alt);
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 12px;
+}
+
+.loading-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(90deg, var(--theme-primary), var(--theme-secondary));
+    border-radius: 6px;
+    animation: loadingAnim 1.2s infinite ease-in-out alternate;
+}
+
+.loading-text {
+    color: var(--theme-muted);
+    font-size: 15px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    animation: blinkText 1.5s infinite;
+}
+
+@keyframes pulseLogo {
+    0% { transform: scale(1); box-shadow: 0 0 15px var(--theme-primary); }
+    100% { transform: scale(1.1); box-shadow: 0 0 35px var(--theme-secondary); border-color: var(--theme-secondary); color: var(--theme-secondary); }
+}
+
+@keyframes loadingAnim {
+    0% { left: 0%; width: 20%; }
+    100% { left: 80%; width: 40%; }
+}
+
+@keyframes blinkText {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+
