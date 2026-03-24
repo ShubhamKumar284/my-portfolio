@@ -501,10 +501,18 @@ font-weight: 500;
 transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
+@keyframes pillGlow {
+  0% { box-shadow: 0 0 15px var(--theme-primary); border-color: var(--theme-primary); }
+  50% { box-shadow: 0 0 25px var(--theme-secondary); border-color: var(--theme-secondary); }
+  100% { box-shadow: 0 0 15px var(--theme-primary); border-color: var(--theme-primary); }
+}
+
 .skill-pill:hover{
-transform:translateY(-5px) scale(1.02);
-border-color:var(--theme-secondary);
-box-shadow:0 0 20px var(--theme-secondary);
+transform:translateY(-5px) scale(1.05);
+animation: pillGlow 2s infinite alternate;
+background: linear-gradient(145deg, rgba(17, 17, 34, 0.8), rgba(124, 58, 237, 0.15));
+z-index: 10;
+position: relative;
 }
 
 .icon-box{
@@ -641,18 +649,47 @@ padding:28px;
 border-radius:16px;
 background:var(--theme-bg);
 position:relative;
-transition:0.4s;
-border:1px solid transparent;
+transition:all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+border:2px solid transparent;
+overflow: hidden;
+z-index: 1;
+}
+
+.skills-card::before {
+content: '';
+position: absolute;
+top: 0;
+left: -100%;
+width: 50%;
+height: 100%;
+background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.1), transparent);
+transform: skewX(-20deg);
+transition: all 0.5s;
+z-index: -1;
+}
+
+.skills-card:hover::before {
+left: 150%;
+transition: all 0.7s;
 }
 
 .skills-card:hover{
 transform:translateY(-8px) scale(1.02);
+box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 25px var(--card-color, var(--theme-secondary));
+border-color: var(--card-color, var(--theme-secondary));
+background: linear-gradient(to bottom, var(--theme-bg), rgba(255, 255, 255, 0.03));
 }
 
 .skills-header{
 font-size:18px;
 font-weight:600;
 margin-bottom:15px;
+transition: all 0.3s;
+}
+
+.skills-card:hover .skills-header {
+color: var(--card-color, var(--theme-primary));
+text-shadow: 0 0 10px rgba(255,255,255,0.1);
 }
 
 .skills-tags{
@@ -667,6 +704,16 @@ border-radius:20px;
 font-size:13px;
 background:var(--theme-card);
 border:1px solid #444;
+transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+cursor: default;
+}
+
+.skills-tags span:hover {
+background: var(--card-color, var(--theme-primary));
+color: #fff;
+border-color: transparent;
+transform: translateY(-3px) scale(1.05);
+box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
 
 .skills-count{
@@ -675,44 +722,64 @@ bottom:15px;
 right:20px;
 font-size:12px;
 color:var(--theme-muted);
+transition: all 0.3s;
+}
+
+.skills-card:hover .skills-count {
+color: var(--card-color, var(--theme-text));
 }
 
 
 /* Different glowing colors */
 
+@keyframes pulseBorder {
+  0% { 
+    box-shadow: 0 0 5px rgba(0,0,0,0.5), inset 0 0 2px rgba(0,0,0,0.5); 
+    border-color: rgba(255, 255, 255, 0.05); 
+  }
+  50% { 
+    box-shadow: 0 0 25px var(--card-color), inset 0 0 15px var(--card-color); 
+    border-color: var(--card-color); 
+  }
+  100% { 
+    box-shadow: 0 0 5px rgba(0,0,0,0.5), inset 0 0 2px rgba(0,0,0,0.5); 
+    border-color: rgba(255, 255, 255, 0.05); 
+  }
+}
+
 .card-cyan{
-border-color:#06b6d4;
-box-shadow:0 0 15px rgba(6,182,212,0.2);
+--card-color: #06b6d4;
+animation: pulseBorder 4s infinite alternate;
 }
 
 .card-purple{
-border-color:var(--theme-primary);
-box-shadow:0 0 15px rgba(168,85,247,0.2);
+--card-color: var(--theme-primary);
+animation: pulseBorder 4.5s infinite alternate;
 }
 
 .card-blue{
-border-color:var(--theme-blue);
-box-shadow:0 0 15px rgba(59,130,246,0.2);
+--card-color: var(--theme-blue);
+animation: pulseBorder 5s infinite alternate;
 }
 
 .card-green{
-border-color:var(--theme-secondary);
-box-shadow:0 0 15px rgba(34,197,94,0.2);
+--card-color: var(--theme-secondary);
+animation: pulseBorder 4.2s infinite alternate;
 }
 
 .card-orange{
-border-color:#f97316;
-box-shadow:0 0 15px rgba(249,115,22,0.2);
+--card-color: #f97316;
+animation: pulseBorder 4.8s infinite alternate;
 }
 
 .card-pink{
-border-color:#ec4899;
-box-shadow:0 0 15px rgba(236,72,153,0.2);
+--card-color: #ec4899;
+animation: pulseBorder 4.3s infinite alternate;
 }
 
 .card-yellow{
-border-color:#facc15;
-box-shadow:0 0 15px rgba(250,204,21,0.25);
+--card-color: #facc15;
+animation: pulseBorder 4.6s infinite alternate;
 }
 
 .edu-sub{
