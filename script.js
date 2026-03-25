@@ -44,7 +44,8 @@ const text = [
 "Data Science Enthusiast",
 "Machine Learning Learner",
 "Data Scientist",
-"Data Analyst"
+"Data Analyst",
+"Software Developer"
 ];
 
 let count = 0;

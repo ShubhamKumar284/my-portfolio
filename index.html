@@ -78,13 +78,19 @@ SK
 <a href="#skills">Skills</a>
 <a href="#projects">Projects</a>
 <a href="#education">Education</a>
+<a href="#achievements">Achievements</a>
 <a href="#contact">Contact</a>
 </nav>
 
 </header>
 
 
-<section class="hero" id="home">
+<section class="hero" id="home" style="position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: 100px;">
+
+<div class="availability-pill" style="position: absolute; top: 40px; left: 60px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 50px; color: #4ade80; font-size: 14px; font-weight: 500;">
+<span class="dot" style="width: 8px; height: 8px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80;"></span>
+Available for Opportunities
+</div>
 
 <p class="intro">HELLO WORLD, I'M</p>
 
@@ -92,9 +98,8 @@ SK
 
 <h2 id="typing"></h2>
 
-<p class="hero-text">
-Data Science student passionate about machine learning,
-data analytics and building intelligent data-driven systems.
+<p class="hero-text" style="max-width: 800px; margin: 0 auto; line-height: 1.6;">
+Data Science student passionate about machine learning, data analytics, and building intelligent data-driven systems. Strong foundation in Data Structures & Algorithms, eager to leverage statistical models and modern algorithms to uncover actionable insights and solve complex real-world challenges.
 </p>
 
 <div class="hero-buttons">
@@ -104,10 +109,17 @@ data analytics and building intelligent data-driven systems.
 <a href="mailto:shubhamkumar240804@gmail.com"
 class="btn btn-outline">Contact</a>
 
-<a href="Shubham_cv.pdf" download class="btn btn-download">
+<a href="ShubhamKr_CV_final.pdf" download class="btn btn-download">
 ⭣ Download CV
 </a>
 
+</div>
+
+<div class="scroll-indicator" style="position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%); width: 100%; margin: 0;">
+<a href="#education" style="display: flex; flex-direction: column; align-items: center; gap: 8px; text-decoration: none; color: var(--theme-secondary);">
+<i class="fa-solid fa-angles-down"></i>
+<span class="scroll-text" style="font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; text-decoration: none;">SCROLL</span>
+</a>
 </div>
 
 </section>
@@ -115,8 +127,8 @@ class="btn btn-outline">Contact</a>
 
 <section id="education" class="reveal">
 
-<p class="edu-sub"></p>
 <div class="section-divider"></div>
+<p class="section-subtitle"><span>//</span> ACADEMIC JOURNEY</p>
 <h2 class="section-title edu-title">Education</h2>
 
 <div class="timeline">
@@ -190,6 +202,7 @@ class="btn btn-outline">Contact</a>
 <section id="skills1" class="reveal">
 
 <div class="section-divider"></div>
+<p class="section-subtitle"><span>//</span> CORE TECHNOLOGIES</p>
 <h2 class="section-title programming-title">Programming Languages</h2>
 
 <div class="skills">
@@ -252,6 +265,7 @@ Java
 <section id="data-science" class="reveal">
 
 <div class="section-divider"></div>
+<p class="section-subtitle"><span>//</span> DATA EXPERTISE</p>
 <h2 class="section-title data-title">Data Science</h2>
 
 
@@ -368,6 +382,7 @@ Jupyter
 <section id="projects" class="reveal">
 
 <div class="section-divider"></div>
+<p class="section-subtitle"><span>//</span> FEATURED WORKS</p>
 <h2 class="section-title projects-title">Projects</h2>
 
 <div class="project-grid">
@@ -487,8 +502,8 @@ View Code
 
 <section id="skills" class="reveal">
 
-<p class="skills-sub"></p>
 <div class="section-divider"></div>
+<p class="section-subtitle"><span>//</span> TECHNICAL ARSENAL</p>
 <h2 class="section-title skills-title">Skills</h2>
 
 <div class="skills-container">
@@ -627,12 +642,12 @@ View Code
 
 <section id="achievements" class="reveal">
 
-<p class="skills-sub"></p>
+<p class="section-subtitle"><span>//</span> MILESTONES & RECOGNITION</p>
 <h2 class="skills-title">Achievements</h2>
 
 <div class="achievement-grid">
 
-<a href="https://leetcode.com/u/ShubhamKumar_17/" target="_blank" class="achievement-card purple">
+<a href="https://leetcode.com/u/ShubhamKumar_17/" target="_blank" class="achievement-card card-purple">
 <div class="ach-icon"></div>
 <span class="ach-year">2025</span>
 <h3>Contest Rating 1531</h3>
@@ -648,7 +663,7 @@ Achieved a contest rating of 1531 by solving 500+ coding problems and maintainin
 
 
 
-<a href="https://www.geeksforgeeks.org/profile/shubhamkrr17" target="_blank" class="achievement-card blue">
+<a href="https://www.geeksforgeeks.org/profile/shubhamkrr17" target="_blank" class="achievement-card card-blue">
 <div class="ach-icon"></div>
 <span class="ach-year">2025</span>
 <h3>University Rank Under 550</h3>
@@ -678,7 +693,7 @@ Earned multiple coding badges through consistent participation and solving diver
 
 <section id="certifications" class="reveal">
 
-<p class="skills-sub"></p>
+<p class="section-subtitle"><span>//</span> PROFESSIONAL ATTAINMENTS</p>
 <h2 class="skills-title">Certifications</h2>
 
 <div class="cert-grid">
@@ -764,51 +779,81 @@ Earned multiple coding badges through consistent participation and solving diver
 
 <div class="section-divider"></div>
 
-<p class="skills-sub"></p>
-<h2 class="skills-title">Contact</h2>
+<p class="section-subtitle"><span>//</span> GET IN TOUCH</p>
+<h2 class="contact-heading">Let's <span>Connect</span></h2>
+<p class="contact-subtitle">Open to internships, full-time roles and exciting collaborations.</p>
 
-<div class="contact-grid">
+<div class="contact-wrapper">
+    <!-- Left Column -->
+    <div class="contact-left">
+        <p class="contact-message">Whether you have an opportunity, a project idea, or just want to say hi — my inbox is always open!</p>
+        
+        <div class="contact-cards">
+            
+            <a href="mailto:shubhamkumar240804@gmail.com" class="c-card">
+                <div class="c-icon"><i class="fa-solid fa-envelope"></i></div>
+                <div class="c-info">
+                    <span class="c-label">EMAIL</span>
+                    <span class="c-value">shubhamkumar240804@gmail.com</span>
+                </div>
+            </a>
 
-<a href="mailto:shubhamkumar240804@gmail.com" class="contact-box email">
-<div class="contact-icon">
-<i class="fa-solid fa-envelope"></i>
-</div>
-<div class="contact-info">
-<span>Email</span>
-<p>shubhamkumar240804@gmail.com</p>
-</div>
-</a>
+            <a href="tel:+917903443693" class="c-card">
+                <div class="c-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+                <div class="c-info">
+                    <span class="c-label">MOBILE</span>
+                    <span class="c-value">+91-7903443693</span>
+                </div>
+            </a>
 
-<a href="tel:+917903443693" class="contact-box phone">
-<div class="contact-icon">
-<i class="fa-solid fa-phone"></i>
-</div>
-<div class="contact-info">
-<span>Phone</span>
-<p>+91 7903443693</p>
-</div>
-</a>
+            <a href="https://linkedin.com" target="_blank" class="c-card">
+                <div class="c-icon"><i class="fa-brands fa-linkedin"></i></div>
+                <div class="c-info">
+                    <span class="c-label">LINKEDIN</span>
+                    <span class="c-value">Shubham Kumar</span>
+                </div>
+            </a>
 
-<a href="https://github.com/ShubhamKumar284" target="_blank" class="contact-box github">
-<div class="contact-icon">
-<i class="fa-brands fa-github"></i>
-</div>
-<div class="contact-info">
-<span>GitHub</span>
-<p>ShubhamKumar284</p>
-</div>
-</a>
+            <a href="https://github.com/ShubhamKumar284" target="_blank" class="c-card">
+                <div class="c-icon"><i class="fa-brands fa-github"></i></div>
+                <div class="c-info">
+                    <span class="c-label">GITHUB</span>
+                    <span class="c-value">ShubhamKumar284</span>
+                </div>
+            </a>
+            
+        </div>
+    </div>
 
-<a href="https://linkedin.com" target="_blank" class="contact-box linkedin">
-<div class="contact-icon">
-<i class="fa-brands fa-linkedin"></i>
-</div>
-<div class="contact-info">
-<span>LinkedIn</span>
-<p>Shubham Kumar</p>
-</div>
-</a>
-
+    <!-- Right Column (Form) -->
+    <div class="contact-right">
+        <form class="contact-form">
+            <div class="input-row">
+                <div class="input-group">
+                    <label>Name</label>
+                    <input type="text" placeholder="Your Name" required>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="your@email.com" required>
+                </div>
+            </div>
+            
+            <div class="input-group">
+                <label>Subject</label>
+                <input type="text" placeholder="Internship / Project Collab / Say Hi" required>
+            </div>
+            
+            <div class="input-group">
+                <label>Message</label>
+                <textarea rows="5" placeholder="Hi Shubham..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn" onclick="event.preventDefault();">
+                <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+        </form>
+    </div>
 </div>
 
 </section>
@@ -833,7 +878,7 @@ Earned multiple coding badges through consistent participation and solving diver
 
 <!-- Center -->
 <div class="footer-links">
-<a href="#projects">Web Projects</a>
+<a href="#projects">Projects</a>
 <a href="#data-science">Data Science</a>
 <a href="#contact">Contact</a>
 </div>
