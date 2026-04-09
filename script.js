@@ -374,4 +374,106 @@ if (counters.length > 0) {
     counters.forEach(counter => counterObserver.observe(counter));
 }
 
+/* =========================
+   CONTACT FORM SUBMISSION WITH CONFETTI & WEB3FORMS
+========================= */
+const contactForm = document.querySelector('.contact-form');
+if (contactForm) {
+    contactForm.addEventListener('submit', async function(e) {
+        e.preventDefault(); // Prevent page reload
+        
+        const submitBtn = this.querySelector('.submit-btn');
+        const originalHTML = submitBtn ? submitBtn.innerHTML : '';
+        if (submitBtn) {
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+            submitBtn.disabled = true;
+        }
+
+        // Prepare data for Web3Forms
+        const formData = new FormData(this);
+        formData.append("access_key", "f7b67418-cff2-44b4-8b27-74798ab8391c"); // <-- Setup your Key here
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+
+        try {
+            const response = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: json
+            });
+
+            const result = await response.json();
+
+            if (response.status === 200) {
+                // Show confetti animation
+                var duration = 3 * 1000;
+                var end = Date.now() + duration;
+
+                (function frame() {
+                    confetti({
+                        particleCount: 5,
+                        angle: 60,
+                        spread: 55,
+                        origin: { x: 0 },
+                        colors: ['#a855f7', '#22C55E', '#3B82F6']
+                    });
+                    confetti({
+                        particleCount: 5,
+                        angle: 120,
+                        spread: 55,
+                        origin: { x: 1 },
+                        colors: ['#a855f7', '#22C55E', '#3B82F6']
+                    });
+
+                    if (Date.now() < end) {
+                        requestAnimationFrame(frame);
+                    }
+                }());
+                
+                // Clear the form
+                contactForm.reset();
+                
+                // Change button text temporarily to show success
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Sent Successfully!';
+                    submitBtn.style.background = 'var(--theme-secondary)';
+                    
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalHTML;
+                        submitBtn.style.background = '';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }
+            } else {
+                console.log(result);
+                if (submitBtn) {
+                    submitBtn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error Sending';
+                    submitBtn.style.background = '#ef4444'; // red theme
+                    
+                    setTimeout(() => {
+                        submitBtn.innerHTML = originalHTML;
+                        submitBtn.style.background = '';
+                        submitBtn.disabled = false;
+                    }, 3000);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            if (submitBtn) {
+                submitBtn.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> Error Sending';
+                submitBtn.style.background = '#ef4444'; // red theme
+                
+                setTimeout(() => {
+                    submitBtn.innerHTML = originalHTML;
+                    submitBtn.style.background = '';
+                    submitBtn.disabled = false;
+                }, 3000);
+            }
+        }
+    });
+}
+
 });

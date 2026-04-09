@@ -904,25 +904,25 @@
                     <div class="input-row">
                         <div class="input-group">
                             <label>Name</label>
-                            <input type="text" placeholder="Your Name" required>
+                            <input type="text" name="name" placeholder="Your Name" required>
                         </div>
                         <div class="input-group">
                             <label>Email</label>
-                            <input type="email" placeholder="your@email.com" required>
+                            <input type="email" name="email" placeholder="your@email.com" required>
                         </div>
                     </div>
 
                     <div class="input-group">
                         <label>Subject</label>
-                        <input type="text" placeholder="Internship / Project Collab / Say Hi" required>
+                        <input type="text" name="subject" placeholder="Internship / Project Collab / Say Hi" required>
                     </div>
 
                     <div class="input-group">
                         <label>Message</label>
-                        <textarea rows="5" placeholder="Hi Shubham..." required></textarea>
+                        <textarea rows="5" name="message" placeholder="Hi Shubham..." required></textarea>
                     </div>
 
-                    <button type="submit" class="submit-btn" onclick="event.preventDefault();">
+                    <button type="submit" class="submit-btn">
                         <i class="fa-solid fa-paper-plane"></i> Send Message
                     </button>
                 </form>
@@ -992,7 +992,8 @@
 
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js?v=4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <script src="script.js?v=5"></script>
 
 </body>
 
