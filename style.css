@@ -678,6 +678,7 @@ transform:translateY(-8px) scale(1.02);
 box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 25px var(--card-color, var(--theme-secondary));
 border-color: var(--card-color, var(--theme-secondary));
 background: linear-gradient(to bottom, var(--theme-bg), rgba(255, 255, 255, 0.03));
+animation: none;
 }
 
 .skills-header{
