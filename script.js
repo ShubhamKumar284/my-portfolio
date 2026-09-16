@@ -535,4 +535,25 @@ magneticButtons.forEach(btn => {
     });
 });
 
+/* =========================
+   MOBILE MENU TOGGLE
+========================= */
+const mobileMenu = document.getElementById('mobile-menu');
+const nav = document.querySelector('nav');
+const navLinksMobile = document.querySelectorAll('nav a');
+
+if (mobileMenu && nav) {
+    mobileMenu.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        nav.classList.toggle('active');
+    });
+
+    navLinksMobile.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            nav.classList.remove('active');
+        });
+    });
+}
+
 });
