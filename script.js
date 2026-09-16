@@ -16,14 +16,14 @@ if(typeof particlesJS !== "undefined") {
         "interactivity": {
             "detect_on": "canvas",
             "events": {
-                "onhover": {"enable": true, "mode": "grab"},
+                "onhover": {"enable": true, "mode": "repulse"},
                 "onclick": {"enable": true, "mode": "push"},
                 "resize": true
             },
             "modes": {
                 "grab": {"distance": 140, "line_linked": {"opacity": 1}},
                 "bubble": {"distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3},
-                "repulse": {"distance": 200, "duration": 0.4},
+                "repulse": {"distance": 150, "duration": 0.4},
                 "push": {"particles_nb": 4},
                 "remove": {"particles_nb": 2}
             }
@@ -86,7 +86,7 @@ setTimeout(type, 80);
 /* =========================
    PRELOADER
 ========================= */
-window.addEventListener('load', () => {
+const hidePreloader = () => {
     const preloader = document.querySelector('.preloader');
     if(preloader) {
         setTimeout(() => {
@@ -95,37 +95,44 @@ window.addEventListener('load', () => {
             setTimeout(() => preloader.remove(), 600);
         }, 600);
     }
-});
+};
+
+if (document.readyState === 'complete') {
+    hidePreloader();
+} else {
+    window.addEventListener('load', hidePreloader);
+}
+
 
 /* =========================
-   SCROLL REVEAL & STAGGER
+   AOS ANIMATIONS (SCROLL REVEAL)
 ========================= */
 
-const reveals = document.querySelectorAll(".reveal, .donut-section, .hero");
-
-if(reveals.length > 0){
-    const observer = new IntersectionObserver((entries)=>{
-        entries.forEach(entry=>{
-            if(entry.isIntersecting){
-                entry.target.classList.add("active");
-                
-                const children = entry.target.querySelectorAll('.stagger-child:not(.show)');
-                children.forEach((child, index) => {
-                    setTimeout(() => {
-                        child.classList.add('show');
-                    }, index * 120);
-                });
-            }
-        });
-    },{
-        threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
+const addAOS = (selector, animation, delayStep = 100) => {
+    const elements = document.querySelectorAll(selector);
+    elements.forEach((el, index) => {
+        el.setAttribute('data-aos', animation);
+        el.setAttribute('data-aos-delay', (index * delayStep).toString());
+        el.setAttribute('data-aos-duration', '800');
     });
+};
 
-    reveals.forEach(section=>{
-        const staggerTargets = section.querySelectorAll('.skill-pill, .project-card, .timeline-item, .skills-card, .achievement-card, .cert-card, .contact-box, .ds-card, .donut-card');
-        staggerTargets.forEach(child => child.classList.add('stagger-child'));
-        observer.observe(section);
+addAOS('.project-card', 'fade-up', 150);
+addAOS('.skill-pill', 'zoom-in', 50);
+addAOS('.skills-card', 'flip-left', 150);
+addAOS('.achievement-card', 'fade-right', 150);
+addAOS('.cert-image-card', 'zoom-in-up', 150);
+addAOS('.timeline-item', 'fade-left', 200);
+addAOS('.donut-card', 'zoom-in', 150);
+addAOS('.ds-card', 'fade-up', 150);
+addAOS('.section-title', 'fade-down', 0);
+addAOS('.section-subtitle', 'fade-up', 0);
+
+if (typeof AOS !== 'undefined') {
+    AOS.init({
+        once: false,
+        mirror: true,
+        offset: 50
     });
 }
 
@@ -475,5 +482,57 @@ if (contactForm) {
         }
     });
 }
+
+/* =========================
+   VANILLA TILT 3D EFFECT
+========================= */
+if (typeof VanillaTilt !== 'undefined') {
+    VanillaTilt.init(document.querySelectorAll(".project-card, .skills-card, .cert-image-card, .achievement-card"), {
+        max: 8,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.2,
+        scale: 1.02
+    });
+}
+
+/* =========================
+   SCROLL PROGRESS BAR
+========================= */
+const scrollProgress = document.getElementById('scroll-progress');
+
+window.addEventListener('scroll', () => {
+    if (scrollProgress) {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        scrollProgress.style.width = scrollPercent + '%';
+    }
+});
+
+/* =========================
+   MAGNETIC BUTTONS
+========================= */
+const magneticButtons = document.querySelectorAll('.btn-primary, .github-btn, .demo-btn, .btn-outline, .btn-download');
+
+magneticButtons.forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+        const rect = btn.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        
+        const deltaX = (x - centerX) / centerX;
+        const deltaY = (y - centerY) / centerY;
+        
+        btn.style.transform = `translate(${deltaX * 10}px, ${deltaY * 10}px) scale(1.05)`;
+    });
+    
+    btn.addEventListener('mouseleave', () => {
+        btn.style.transform = '';
+    });
+});
 
 });

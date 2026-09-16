@@ -144,6 +144,16 @@ box-sizing:border-box;
 font-family:Poppins;
 }
 
+@keyframes pulseDot {
+    0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(74, 222, 128, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0); }
+}
+
+.availability-pill .dot {
+    animation: pulseDot 2s infinite;
+}
+
 body{
 background:var(--theme-bg);
 background-image:
@@ -229,12 +239,20 @@ margin: 15px 0;
 line-height: 1.2;
 }
 
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .hero h1 span{
-background: linear-gradient(135deg, var(--theme-primary), var(--theme-secondary));
+background: linear-gradient(270deg, var(--theme-primary), var(--theme-secondary), var(--theme-blue), var(--theme-primary));
+background-size: 300% 300%;
 -webkit-background-clip: text;
 -webkit-text-fill-color: transparent;
 background-clip: text;
 display: inline-block;
+animation: gradient-shift 5s ease infinite;
 }
 
 .hero-buttons{
@@ -1652,9 +1670,43 @@ margin:80px auto;
     height: 100%;
     object-fit: contain;
     transition: transform 0.4s ease;
+    animation: certGlow 4s infinite alternate;
 }
+
+@keyframes certGlow {
+    0% { filter: drop-shadow(0 0 4px var(--theme-primary)); }
+    100% { filter: drop-shadow(0 0 15px var(--theme-secondary)); }
+}
+
 .cert-image-card:hover .cert-img-wrapper img {
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(-5px);
+}
+
+/* Shiny Sweep Effect for Cert Card */
+.cert-image-card {
+    position: relative;
+    isolation: isolate;
+}
+.cert-image-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.15) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg);
+    transition: none;
+    z-index: 5;
+    pointer-events: none;
+}
+.cert-image-card:hover::after {
+    animation: certSweep 0.8s ease-out forwards;
+}
+
+@keyframes certSweep {
+    0% { left: -100%; }
+    100% { left: 200%; }
 }
 .cert-info {
     padding: 20px;
@@ -2004,16 +2056,7 @@ z-index:1000;
 
 
 
-.reveal{
-opacity:0;
-transform:translateY(50px);
-transition:all 0.8s ease;
-}
 
-.reveal.active{
-opacity:1;
-transform:translateY(0);
-}
 
 /* Theme Switcher */
 .theme-switcher {
@@ -2290,3 +2333,82 @@ transform:translateY(0);
     position: relative;
     z-index: 5;
 }
+
+/* =========================
+   ADVANCED ANIMATIONS
+========================= */
+
+/* Floating Badge */
+.logo-badge {
+    animation: floatingBadge 3s ease-in-out infinite;
+}
+
+@keyframes floatingBadge {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Shiny Sweep on Buttons */
+.btn-primary, .github-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary::before, .github-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+    transform: skewX(-20deg) translate3d(-300%, 0, 0);
+    transition: transform 0.7s ease;
+    z-index: 1;
+}
+
+.btn-primary:hover::before, .github-btn:hover::before {
+    transform: skewX(-20deg) translate3d(300%, 0, 0);
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--theme-primary), var(--theme-secondary), var(--theme-blue));
+    z-index: 10000;
+    transition: width 0.1s ease-out;
+    box-shadow: 0 0 10px var(--theme-primary);
+}
+
+/* Animated Tech Grid Floor */
+.tech-grid {
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background-image: 
+        linear-gradient(var(--theme-primary) 2px, transparent 2px),
+        linear-gradient(90deg, var(--theme-primary) 2px, transparent 2px);
+    background-size: 80px 80px;
+    opacity: 0.15;
+    z-index: -2;
+    transform: perspective(600px) rotateX(75deg);
+    transform-origin: top;
+    animation: gridMove 3s linear infinite;
+    pointer-events: none;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 10%, black 90%);
+    mask-image: linear-gradient(to bottom, transparent 10%, black 90%);
+}
+
+@keyframes gridMove {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 80px; }
+}
+
+

@@ -15,11 +15,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
 
 </head>
 
 <body>
+    <div class="scroll-progress" id="scroll-progress"></div>
+
     <!-- Preloader -->
     <div class="preloader">
         <div class="loader-content">
@@ -86,28 +89,31 @@
 
 
     <section class="hero" id="home"
-        style="position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: 100px;">
+        style="position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding-bottom: 100px; overflow: hidden;">
+        
+        <!-- Animated Tech Grid Floor -->
+        <div class="tech-grid"></div>
 
         <div class="availability-pill"
-            style="position: absolute; top: 40px; left: 60px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 50px; color: #4ade80; font-size: 14px; font-weight: 500;">
+            style="position: absolute; top: 40px; left: 60px; display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; background: rgba(34, 197, 94, 0.1); border: 1px solid rgba(34, 197, 94, 0.3); border-radius: 50px; color: #4ade80; font-size: 14px; font-weight: 500; z-index: 10;">
             <span class="dot"
                 style="width: 8px; height: 8px; background-color: #4ade80; border-radius: 50%; box-shadow: 0 0 8px #4ade80;"></span>
             Available for Opportunities
         </div>
 
-        <p class="intro">HELLO WORLD, I'M</p>
+        <p class="intro" data-aos="fade-down" data-aos-duration="1000">HELLO WORLD, I'M</p>
 
-        <h1>Shubham <span>Kumar</span></h1>
+        <h1 data-aos="fade-right" data-aos-duration="1000" data-aos-delay="200">Shubham <span>Kumar</span></h1>
 
-        <h2 id="typing"></h2>
+        <h2 id="typing" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400"></h2>
 
-        <p class="hero-text" style="max-width: 800px; margin: 0 auto; line-height: 1.6;">
+        <p class="hero-text" style="max-width: 800px; margin: 0 auto; line-height: 1.6;" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
             Data Science student passionate about machine learning, data analytics, and building intelligent data-driven
             systems. Strong foundation in Data Structures & Algorithms, eager to leverage statistical models and modern
             algorithms to uncover actionable insights and solve complex real-world challenges.
         </p>
 
-        <div class="hero-buttons">
+        <div class="hero-buttons" data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="800">
 
             <a href="#projects" class="btn btn-primary">View Projects</a>
 
@@ -151,7 +157,7 @@
                     <p class="location">Punjab, India</p>
 
                     <div class="timeline-meta">
-                        <span class="cgpa">CGPA: 7.93</span>
+                        <span class="cgpa">CGPA: 8.01</span>
                         <span class="year">Aug 2023 - Present</span>
                     </div>
 
@@ -663,7 +669,7 @@
                 <h3>Contest Rating 1531</h3>
                 <p class="ach-source">LeetCode</p>
                 <p class="ach-desc">
-                    Achieved a contest rating of 1531 by solving 700+ coding problems and maintaining a 150+ day coding
+                    Achieved a contest rating of 1531 by solving 900+ coding problems and maintaining a 250+ day coding
                     streak.
                 </p>
             </a>
@@ -689,7 +695,7 @@
                 <div class="ach-icon"></div>
                 <span class="ach-year">2024</span>
 
-                <h3>5+ Coding Badges Earned</h3>
+                <h3>7+ Coding Badges Earned</h3>
                 <p class="ach-source">LeetCode</p>
 
                 <p class="ach-desc">
@@ -1017,9 +1023,13 @@
 
 
 
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
-    <script src="script.js?v=5"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    
+    <script src="script.js?v=6"></script>
 
 </body>
 
